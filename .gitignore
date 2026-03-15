@@ -1,0 +1,12 @@
+# Секреты
+credentials.json
+.env
+config.py
+
+# Настройки PyCharm
+.idea/
+*.iml
+
+# Виртуальное окружение
+venv/
+ENV/

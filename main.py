@@ -76,8 +76,8 @@ def get_main_menu():
 
     # Остальные кнопки остаются стандартными
     other_buttons = [
-        [InlineKeyboardButton(text="Служба поддержки", url=SUPPORT_URL)],
-        [InlineKeyboardButton(text="Telegram-канал", url=CHANNEL_URL)]
+        [InlineKeyboardButton(text="Служба поддержки", url=SUPPORT_URL)]
+#        [InlineKeyboardButton(text="Telegram-канал", url=CHANNEL_URL)]
     ]
 
     return InlineKeyboardMarkup(inline_keyboard=[webapp_button] + other_buttons)

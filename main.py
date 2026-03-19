@@ -9,7 +9,7 @@ from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, W
 # КЛЮЧИ И НАСТРОЙКИ
 # ==========================================
 BOT_TOKEN = "8244205106:AAGYh6dYZcy762h_tRLzesu2cvh7711R-O4"
-MINI_APP_URL = "https://smart-spell-aivion.duckdns.org/"
+MINI_APP_URL = "https://aivion.moscow/"
 SUPPORT_USERNAME = "@andlv00"
 SUPPORT_URL = f"https://t.me/{SUPPORT_USERNAME}"
 CHANNEL_URL = "t.me/aivionagency"
@@ -99,19 +99,26 @@ async def cmd_start_menu(message: Message):
 
     # Новый текст приветствия
     welcome_text = (
-        f"Добро пожаловать, {user_name}.\n\n"
+        f"Добро пожаловать, {user_name}!\n\n"
         f"Вы открыли **ANOVA** — сервис, который использует ИИ, чтобы сделать ваше "
         f"изучение английского языка в разы эффективнее.\n\n"
-        f"⚠️ Приложение в активной разработке — если что-то пошло не так, напишите в поддержку.\n"
-        f"✅ Работает без VPN.\n"
-        f"💡 Укажи уровень английского — ИИ будет учитывать его при генерации текстов и оценке слов."
+        f"⚠️ Приложение сейчас в активной разработке, поэтому если что-то пошло не так - напишите в поддержку.\n"
     )
 
     await message.answer(
-        welcome_text,
-        reply_markup=get_main_menu(),
-        parse_mode="Markdown"
-    )
+    welcome_text,
+    reply_markup=get_main_menu(),
+    parse_mode="Markdown"
+)
+
+    # второе сообщение — полностью пассивное
+    await message.answer(
+    "Дорогие друзья!\n\n"
+    "Из-за ограничений со стороны РКН сервис может нестабильно работать без VPN. "
+    "Для большинства пользователей это уже привычная практика (в том числе при использовании Telegram), "
+    "поэтому надеемся, что это не доставит неудобств.\n\n"
+    "Приятного использования!"
+)
 
 @dp.callback_query(F.data == "back_to_menu")
 async def callback_back_to_menu(callback: CallbackQuery):

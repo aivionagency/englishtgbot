@@ -87,6 +87,12 @@ def get_back_to_menu_keyboard():
         [InlineKeyboardButton(text="Главное меню", callback_data="back_to_menu")]
     ])
 
+# --- ОТЛАЖЕННАЯ ОТПРАВКА СООБЩЕНИЙ ---
+
+async def delayed_broadcast(delay_seconds: int, text: str):
+    await asyncio.sleep(delay_seconds)
+    await broadcast_message(text)
+
 
 # --- ОБРАБОТЧИКИ ---
 @dp.message(Command(commands=["start", "menu"]))
@@ -142,6 +148,13 @@ async def main():
     # Используем to_thread, чтобы не блокировать асинхронный цикл.
     await asyncio.to_thread(load_known_users)
 
+    text = (
+        "💡 Совет "
+        "Добавьте в профиль цели изучения языка(например: общение, путешествия, чтение), а не только профессию - "
+        "это поможет системе точнее анализировать релеватность слов."
+    )
+    asyncio.create_task(delayed_broadcast(43200, text))
+    
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
 

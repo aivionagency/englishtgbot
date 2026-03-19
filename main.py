@@ -93,21 +93,24 @@ def get_back_to_menu_keyboard():
 async def cmd_start_menu(message: Message):
     user_name = message.from_user.first_name
 
+    # Проверяем кэш и записываем в Google Таблицу
     if message.from_user.username:
         await asyncio.to_thread(add_user_to_sheet, message.from_user.username)
 
+    # Новый текст приветствия
     welcome_text = (
         f"Добро пожаловать, {user_name}.\n\n"
         f"Вы открыли **ANOVA** — сервис, который использует ИИ, чтобы сделать ваше "
         f"изучение английского языка в разы эффективнее.\n\n"
-        f"Мы также ведём Telegram-канал, где разбираем практические способы применения "
-        f"ИИ в работе, бизнесе и обучении, а также делимся полезными инструментами и новыми идеями."
+        f"⚠️ Приложение в активной разработке — если что-то пошло не так, напишите в поддержку.\n"
+        f"✅ Работает без VPN.\n"
+        f"💡 Укажи уровень английского — ИИ будет учитывать его при генерации текстов и оценке слов."
     )
 
     await message.answer(
         welcome_text,
         reply_markup=get_main_menu(),
-        parse_mode="Markdown"  # Чтобы ANOVA было жирным
+        parse_mode="Markdown"
     )
 
 @dp.callback_query(F.data == "back_to_menu")
